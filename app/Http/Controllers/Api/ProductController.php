@@ -1,7 +1,6 @@
-<?php
+<?php namespace App\Http\Controllers\Api;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        return Product::all();
     }
 
     /**
