@@ -14410,22 +14410,36 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     shop_id: '' // servira per selezionare in che negozio salvare il prodotto
 
   },
-  mounted: function mounted() {
-    var _this = this;
+  computed: {
+    searchProducts: function searchProducts() {
+      var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/products').then(function (resposne) {
-      return _this.products = resposne.data;
-    });
+      return this.products.filter(function (product) {
+        return product.name.toLowerCase().includes(_this.name.toLowerCase());
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getProducts();
   },
   methods: {
     onSubmit: function onSubmit() {
       var self = this;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/products', this.$data).then(function (response) {
         // alert(response.data.message);
-        self.products.push(response.data.product);
+        // self.products.unshift(response.data.product); // add to array
+        self.getProducts(); // get all from server again
+
         self.name = '';
         self.description = '';
         self.price = '';
+      });
+    },
+    getProducts: function getProducts() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/products').then(function (resposne) {
+        return _this2.products = resposne.data;
       });
     }
   }

@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Product::latest()->get(); // latest is like orderBy('created_at', DESC)
+        //return Product::all()->sortByDesc('created_at'); // sort collection (not work cause Vue show things for it index key i think)
     }
 
     /**

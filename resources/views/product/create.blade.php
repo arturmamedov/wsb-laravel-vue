@@ -8,7 +8,7 @@
             <div class="col-sm-6 order-1">
                 <h2>Crea Prodotto</h2>
 
-                <form class="" action="/products" method="POST" @submit.prevent="onSubmit">
+                    <form class="" action="/products" method="POST" @submit.prevent="onSubmit">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="col-12 mb-3">
@@ -30,7 +30,7 @@
             <div class="col-sm-6 order-2">
                 <h2>Lista prodotti creati</h2>
                 <ul class="list-group">
-                    <li v-for="product in products" class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li v-for="product in searchProducts" class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
                             <h6 class="my-0">{{ product.name }}</h6>
                             <small class="text-muted">{{ product.description }}</small>
