@@ -1,16 +1,7 @@
-Products
+@extends('layouts.master')
 
-@verbatim
-<div id="app">
-    <ul>
-        <li v-for="product in products">
-            {{ product.name }} - {{ product.price }} €
-        </li>
-    </ul>
+@section('title', 'Tutti i Prodotti')
 
-
-</div>
-@endverbatim
-
-
-<script src="/js/app.js"></script>
+@section('content')
+    <products-list-component></products-list-component>
+@endsection

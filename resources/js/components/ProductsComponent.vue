@@ -7,13 +7,13 @@
                 <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}">-->
 
                 <div class="col-12 mb-3">
-                    <input class="form-control" type="text" name="name" placeholder="Nome" v-model="name" required/>
+                    <input class="form-control product-name" type="text" name="name" placeholder="Nome" autofocus ref="productNameInput" required v-model="name" @keyup="searchProduct" />
                 </div>
                 <div class="col-12 mb-3">
-                    <input class="form-control" type="text" name="description" placeholder="Descrizione" v-model="description"/>
+                    <input class="form-control" type="text" name="description" placeholder="Descrizione" v-model="description" />
                 </div>
                 <div class="col-12 mb-3">
-                    <input class="form-control" type="text" name="price" placeholder="Prezzo (1.24)" v-model="price" required/>
+                    <input class="form-control" type="text" name="price" placeholder="Prezzo (1.24)" required v-model="price" />
                 </div>
                 <div class="col-12 mb-3">
                     <button class="btn btn-primary btn-block" type="submit">Crea</button>
@@ -22,26 +22,17 @@
         </div>
 
         <div class="col-sm-6 order-2">
-            <h2>Lista prodotti creati</h2>
-            <ul class="list-group">
-                <li v-for="product in searchProducts" class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">{{ product.name }}</h6>
-                        <small class="text-muted">{{ product.description }}</small>
-                    </div>
-                    <span class="text-muted">{{ product.price }} €</span>
-                </li>
-            </ul>
+            <product-list-component></product-list-component>
         </div>
     </div>
 </template>
 
 <script>
+    import ProductsListComponent from './ProductsListComponent.vue';
+
     export default {
         data: function() {
             return {
-                products: [],
-
                 // for form
                 name: '',
                 description: '',
@@ -51,17 +42,15 @@
             }
         },
 
-        computed: {
-            searchProducts: function () {
-                return this.products.filter(product => {
-                    return product.name.toLowerCase().includes(this.name.toLowerCase())
-                })
-            }
+        components: {
+            'product-list-component': ProductsListComponent,
         },
 
-        mounted () {
-            this.getProducts();
-        },
+        // computed: {
+        // },
+
+        // mounted () {
+        // },
 
         methods: {
             onSubmit() {
@@ -72,17 +61,21 @@
                         // alert(response.data.message);
 
                         // self.products.unshift(response.data.product); // add to array
-                        self.getProducts(); // get all from server again
+                        // ProductsListComponent.getProducts(); // get all from server again
+                        Event.$emit('product-created'); // emit event of created for get all products again
 
                         self.name = '';
                         self.description = '';
                         self.price = '';
+
+                        // $(".product-name").focus(); // jquery
+                        self.$refs.productNameInput.focus(); // vue
                     });
             },
-            getProducts() {
-                axios.get('/api/products')
-                    .then(resposne => this.products = resposne.data);
-            },
+            searchProduct() {
+                console.info(this.name);
+                Event.$emit('product-name-type', this.name);
+            }
         }
     }
 </script>

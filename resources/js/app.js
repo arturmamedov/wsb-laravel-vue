@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Event = new Vue();
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('products-component', require('./components/ProductsComponent.vue').default);
+Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,4 +32,8 @@ Vue.component('products-component', require('./components/ProductsComponent.vue'
 const app = new Vue({
     el: '#app',
     data: {},
+
+    // created() {
+    //
+    // }
 });
