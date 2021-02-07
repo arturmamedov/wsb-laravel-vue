@@ -15,6 +15,11 @@
                 <div class="col-12 mb-3">
                     <input class="form-control" type="text" name="price" placeholder="Prezzo (1.24)" required v-model="price" />
                 </div>
+              <div class="col-12 mb-3">
+                    <select class="form-control" name="shop_id" required v-model="shop_id">
+                      <option v-for="shop in shops" :value="shop.id">{{ shop.name }}</option>
+                    </select>
+                </div>
                 <div class="col-12 mb-3">
                     <button class="btn btn-primary btn-block" type="submit">Crea</button>
                 </div>
@@ -39,6 +44,8 @@
                 price: '',
 
                 shop_id: '', // servira per selezionare in che negozio salvare il prodotto
+
+                shops: [],
             }
         },
 
@@ -49,8 +56,9 @@
         // computed: {
         // },
 
-        // mounted () {
-        // },
+        mounted () {
+          this.shops = this.getShops();
+        },
 
         methods: {
             onSubmit() {
