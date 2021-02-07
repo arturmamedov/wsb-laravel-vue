@@ -20,8 +20,12 @@ window.wEvent = new Vue();
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
 Vue.component('products-component', require('./components/ProductsComponent.vue').default);
 Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
+
+import { BootstrapVue } from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

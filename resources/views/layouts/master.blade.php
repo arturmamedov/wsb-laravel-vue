@@ -25,6 +25,8 @@
 <body>
 
 <div id="app" class="container pt-4">
+    <navbar-component></navbar-component>
+
     @yield('content')
 </div>
 
