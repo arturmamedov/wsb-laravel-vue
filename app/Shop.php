@@ -16,4 +16,10 @@ class Shop extends Model
     protected $casts = [
         'extra_json' => 'array'
     ];
+
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
