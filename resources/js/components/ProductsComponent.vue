@@ -83,6 +83,10 @@
             searchProduct() {
                 console.info(this.name);
                 wEvent.$emit('product-name-type', this.name);
+            },
+            getShops() {
+                return axios.get('/api/shops')
+                  .then(resposne => this.shops = resposne.data);
             }
         }
     }
