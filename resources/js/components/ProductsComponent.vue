@@ -36,18 +36,10 @@
     import ProductsListComponent from './ProductsListComponent.vue';
 
     export default {
-        data: function() {
-            return {
-                // for form
-                name: '',
-                description: '',
-                price: '',
-
-                shop_id: '', // servira per selezionare in che negozio salvare il prodotto
-
-                shops: [],
-            }
-        },
+        // data: function() {
+        //     return {
+        //     }
+        // },
 
         components: {
             'product-list-component': ProductsListComponent,
@@ -56,38 +48,10 @@
         // computed: {
         // },
 
-        mounted () {
-          this.shops = this.getShops();
-        },
+        // mounted () {
+        // },
 
-        methods: {
-            onSubmit() {
-                let self = this;
-
-                axios.post('/api/products', this.$data)
-                    .then(function(response) {
-                        // alert(response.data.message);
-
-                        // self.products.unshift(response.data.product); // add to array
-                        // ProductsListComponent.getProducts(); // get all from server again
-                        wEvent.$emit('product-created'); // emit event of created for get all products again
-
-                        self.name = '';
-                        self.description = '';
-                        self.price = '';
-
-                        // $(".product-name").focus(); // jquery
-                        self.$refs.productNameInput.focus(); // vue
-                    });
-            },
-            searchProduct() {
-                console.info(this.name);
-                wEvent.$emit('product-name-type', this.name);
-            },
-            getShops() {
-                return axios.get('/api/shops')
-                  .then(resposne => this.shops = resposne.data);
-            }
-        }
+        // methods: {
+        // }
     }
 </script>

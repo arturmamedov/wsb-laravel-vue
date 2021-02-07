@@ -7,7 +7,7 @@
             <div class="col-6">
                 <input type="text" placeholder="Cerca" class="form-control pull-right" v-model="name" />
 
-                <spna class="help-block" v-if="name.length">Ricerca per  "{{ name }}" risultati: {{ searchProducts.length }}</spna>
+                <span class="help-block" v-if="name.length">Ricerca per  "{{ name }}" risultati: {{ searchProducts.length }}</span>
             </div>
         </div>
 
@@ -56,7 +56,8 @@
 
             // On type
             wEvent.$on('product-name-type', function(input) {
-              console.info('Ricerca: '+input); self.name = input;
+              console.info('Ricerca: '+input);
+              self.name = input;
             });
         },
 
