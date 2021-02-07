@@ -2,10 +2,12 @@
     <div>
         <div class="row">
             <div class="col-6">
-                <h2>Lista prodotti</h2>
+                <h2>Lista prodotti ({{ products.length }})</h2>
             </div>
             <div class="col-6">
                 <input type="text" placeholder="Cerca" class="form-control pull-right" v-model="name" />
+
+                <spna class="help-block" v-if="name.length">Ricerca per  "{{ name }}" risultati: {{ searchProducts.length }}</spna>
             </div>
         </div>
 
@@ -13,9 +15,12 @@
             <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in searchProducts">
                 <div>
                     <h6 class="my-0">{{ product.name }}</h6>
-                    <small class="text-muted">{{ product.description }}</small>
+                    <small class="text-muted" v-if="product.description">{{ product.description }}</small>
                 </div>
-                <span class="text-muted">{{ product.price }} €</span>
+                <span class="text-muted">
+                  <strong>{{ product.shop.name }}</strong> &nbsp;
+                  {{ Number.parseFloat(product.price).toFixed(2) }} €
+                </span>
             </li>
         </ul>
     </div>
@@ -58,7 +63,7 @@
         computed: {
             searchProducts: function () {
                 return this.products.filter(product => {
-                    return product.name.toLowerCase().includes(this.name.toLowerCase())
+                    return product.name.toLowerCase().trim().includes(this.name.toLowerCase().trim())
                 })
             }
         },
