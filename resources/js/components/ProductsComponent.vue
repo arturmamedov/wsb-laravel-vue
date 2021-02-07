@@ -62,7 +62,7 @@
 
                         // self.products.unshift(response.data.product); // add to array
                         // ProductsListComponent.getProducts(); // get all from server again
-                        Event.$emit('product-created'); // emit event of created for get all products again
+                        wEvent.$emit('product-created'); // emit event of created for get all products again
 
                         self.name = '';
                         self.description = '';
@@ -74,7 +74,7 @@
             },
             searchProduct() {
                 console.info(this.name);
-                Event.$emit('product-name-type', this.name);
+                wEvent.$emit('product-name-type', this.name);
             }
         }
     }

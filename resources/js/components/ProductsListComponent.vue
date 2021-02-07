@@ -42,8 +42,17 @@
         },
         created() {
             let self = this;
-            Event.$on('product-created', () => { self.name = ''; /*self.getProducts();*/ });
-            Event.$on('product-name-type', function(input) { console.info('dsa: '+input); self.name = input; });
+
+            // On created
+            wEvent.$on('product-created', function() {
+              self.name = '';
+              self.getProducts();
+            });
+
+            // On type
+            wEvent.$on('product-name-type', function(input) {
+              console.info('Ricerca: '+input); self.name = input;
+            });
         },
 
         computed: {
