@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')->group(function () {
     Route::resource('products', 'ProductController');
+    Route::resource('shops', 'ShopController')->only('index');
 });
